@@ -5,7 +5,7 @@
 ```
 S3Sync.exe
 
--i, --region         (Default: eu-central-1) AWS Region to use, defaults to eu-central-1
+-r, --region         (Default: eu-central-1) AWS Region to use, defaults to eu-central-1
 
 -d, --destination    Required. Destination key in S3 bucket. Without leading /
 
