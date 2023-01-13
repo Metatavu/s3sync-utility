@@ -5,6 +5,7 @@ using Amazon;
 using Amazon.S3;
 using Amazon.S3.Model;
 using Amazon.Runtime;
+using System.Threading.Tasks;
 
 namespace S3Sync
 {
@@ -30,10 +31,10 @@ namespace S3Sync
             [Option('p', "secret", Required = true, HelpText = "AWS access key secret")]
             public string AccessSecret { get; set; }
         }
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            Parser.Default.ParseArguments<Options>(args)
-                .WithParsed(async options =>
+            await Parser.Default.ParseArguments<Options>(args)
+                .WithParsedAsync(async options =>
                 {
                     try
                     {
@@ -54,7 +55,7 @@ namespace S3Sync
                         }
                         Console.WriteLine("File uploaded successfully.");
                     } 
-                    catch (Exception e)
+                    catch (AmazonS3Exception e)
                     {
                         Console.WriteLine($"S3 upload failed: {e.Message}");
                         Console.WriteLine(e.StackTrace);
